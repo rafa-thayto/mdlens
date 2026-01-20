@@ -56,6 +56,26 @@ bun install
 cd ../..
 ```
 
+### Link for Local Development
+
+After building, link the package globally so you can use it anywhere:
+
+```bash
+# Build the project
+bun run build
+
+# Link globally (similar to npm link)
+bun link
+
+# Add bun bin to PATH (if not already added)
+echo 'export PATH="$HOME/.bun/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+
+# Now you can use it anywhere:
+cd ~/some-directory-with-markdown
+md-file-browser
+```
+
 ### Run Development Server
 
 ```bash
