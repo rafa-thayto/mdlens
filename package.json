@@ -1,6 +1,9 @@
 {
-  "name": "@thayto/md",
+  "name": "@rafa-thayto/md",
   "version": "1.0.0",
+  "description": "A CLI tool for browsing markdown files in a beautiful web interface with real-time updates",
+  "license": "MIT",
+  "author": "Rafa Thayto",
   "type": "module",
   "bin": {
     "md": "./dist/cli.js"
