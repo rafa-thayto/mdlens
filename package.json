@@ -1,0 +1,25 @@
+{
+  "name": "mdviewer",
+  "version": "1.0.0",
+  "type": "module",
+  "bin": {
+    "mdviewer": "./dist/cli.js"
+  },
+  "scripts": {
+    "dev": "bun run --watch src/cli.ts",
+    "build": "bun build src/cli.ts --outdir dist --target node && bun run build:client",
+    "build:client": "cd src/client && bun run build",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "glob": "^10.3.10",
+    "ws": "^8.16.0",
+    "open": "^10.0.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/ws": "^8.5.10",
+    "typescript": "^5.3.3"
+  }
+}
