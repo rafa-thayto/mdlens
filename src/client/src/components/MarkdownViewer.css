@@ -38,6 +38,52 @@
   color: #333;
 }
 
+.frontmatter-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.frontmatter-title {
+  margin: 0 0 12px 0;
+  font-size: 2.25em;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1a1a1a;
+}
+
+.frontmatter-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.95em;
+  color: #666;
+}
+
+.frontmatter-author a {
+  color: #2196f3;
+  text-decoration: none;
+}
+
+.frontmatter-author a:hover {
+  text-decoration: underline;
+}
+
+.frontmatter-date {
+  color: #888;
+}
+
+.frontmatter-source {
+  color: #2196f3;
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+.frontmatter-source:hover {
+  text-decoration: underline;
+}
+
 .markdown-content h1,
 .markdown-content h2,
 .markdown-content h3,
