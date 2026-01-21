@@ -14,6 +14,7 @@ export interface WebSocketMessage {
 export interface FileContent {
   path: string;
   content: string;
+  frontmatter?: Record<string, unknown>;
 }
 
 export interface ErrorResponse {

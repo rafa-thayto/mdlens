@@ -1,5 +1,6 @@
 import { join, normalize } from 'path';
 import { readFile, stat } from 'fs/promises';
+import matter from 'gray-matter';
 import type { FileNode, FileContent, ErrorResponse } from '../types';
 import { findMarkdownFiles } from './files';
 
@@ -41,10 +42,21 @@ export class ApiServer {
         };
       }
 
-      const content = await readFile(fullPath, 'utf-8');
+      const rawContent = await readFile(fullPath, 'utf-8');
+      const parsed = matter(rawContent);
+
+      // Only use frontmatter if it's a valid object (not a string from malformed YAML)
+      const isValidFrontmatter =
+        parsed.data &&
+        typeof parsed.data === 'object' &&
+        !Array.isArray(parsed.data) &&
+        Object.keys(parsed.data).length > 0;
+
       return {
         path: filePath,
-        content
+        // If frontmatter parsing failed (content is empty but we have raw content), use raw content
+        content: parsed.content || (!isValidFrontmatter ? rawContent : ''),
+        frontmatter: isValidFrontmatter ? parsed.data : undefined
       };
     } catch (error) {
       return {

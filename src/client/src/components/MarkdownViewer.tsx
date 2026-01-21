@@ -8,6 +8,59 @@ import { MermaidDiagram } from './MermaidDiagram';
 import type { FileContent } from '../types';
 import './MarkdownViewer.css';
 
+function formatDate(date: unknown): string | null {
+  if (!date) return null;
+  const d = new Date(String(date));
+  if (isNaN(d.getTime())) return String(date);
+  return d.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+
+function FrontmatterHeader({ frontmatter }: { frontmatter: Record<string, unknown> }) {
+  const title = frontmatter.title as string | undefined;
+  const author = frontmatter.author as string | undefined;
+  const authorUrl = frontmatter.author_url as string | undefined;
+  const date = formatDate(frontmatter.date);
+  const url = frontmatter.url as string | undefined;
+
+  if (!title && !author && !date && !url) {
+    return null;
+  }
+
+  return (
+    <header className="frontmatter-header">
+      {title && <h1 className="frontmatter-title">{title}</h1>}
+      <div className="frontmatter-meta">
+        {author && (
+          <span className="frontmatter-author">
+            {authorUrl ? (
+              <a href={authorUrl} target="_blank" rel="noopener noreferrer">
+                {author}
+              </a>
+            ) : (
+              author
+            )}
+          </span>
+        )}
+        {date && <span className="frontmatter-date">{date}</span>}
+        {url && (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="frontmatter-source"
+          >
+            View original
+          </a>
+        )}
+      </div>
+    </header>
+  );
+}
+
 interface MarkdownViewerProps {
   file: FileContent | null;
   loading: boolean;
@@ -59,6 +112,7 @@ export function MarkdownViewer({ file, loading, error }: MarkdownViewerProps) {
   return (
     <div className="markdown-viewer">
       <div className="markdown-content">
+        {file.frontmatter && <FrontmatterHeader frontmatter={file.frontmatter} />}
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw, rehypeSanitize]}
