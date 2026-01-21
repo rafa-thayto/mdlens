@@ -1,4 +1,4 @@
-# MDViewer
+# MDLens
 
 A CLI tool for browsing markdown files in a beautiful web interface with real-time updates.
 
@@ -16,7 +16,7 @@ A CLI tool for browsing markdown files in a beautiful web interface with real-ti
 ## Installation
 
 ```bash
-bun install -g @thayto/md
+bun install -g mdlens
 ```
 
 ## Usage
@@ -30,7 +30,7 @@ md
 Or use with bunx:
 
 ```bash
-bunx @thayto/md
+bunx mdlens
 ```
 
 The app will:
@@ -49,7 +49,7 @@ The app will:
 
 ```bash
 git clone <repository>
-cd @thayto/md
+cd mdlens
 bun install
 cd src/client
 bun install
